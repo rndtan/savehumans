@@ -13,6 +13,11 @@
     <Page.Resources>
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
         <x:String x:Key="AppName">Save the Humans</x:String>
+        <ControlTemplate x:Key="EnemyTemplate" TargetType="ContentControl">
+            <Grid>
+                <Ellipse Fill="Red" Height="100" Stroke="Black" Width="100"/>
+            </Grid>
+        </ControlTemplate>
     </Page.Resources>
 
     <!--
@@ -54,8 +59,8 @@
         </Grid>
         <Button x:Name="startButton" Content="Start!" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center"/>
         <StackPanel Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock TextWrapping="Wrap" Text="Avoid These" Style="{StaticResource SubheaderTextBlockStyle}"/>
-            <ContentControl Content="ContentControl"/>
+            <TextBlock TextWrapping="Wrap" Text="Avoid These" Style="{StaticResource SubheaderTextBlockStyle}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <ContentControl Content="ContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource EnemyTemplate}"/>
         </StackPanel>
         <ProgressBar Grid.Column="1" Grid.Row="2" Height="20"/>
         <Canvas x:Name="playArea" Grid.Row="1" Grid.ColumnSpan="3">
@@ -65,6 +70,22 @@
                     <GradientStop Color="Black" Offset="1"/>
                 </LinearGradientBrush>
             </Canvas.Background>
+            <Rectangle x:Name="target" Height="50" Canvas.Left="183.346" Stroke="Black" Canvas.Top="184.979" Width="50" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                <Rectangle.RenderTransform>
+                    <CompositeTransform Rotation="45"/>
+                </Rectangle.RenderTransform>
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <StackPanel x:Name="human" Orientation="Vertical">
+                <Ellipse Fill="White" Height="10" Width="10"/>
+                <Rectangle Fill="White" Height="25" Width="10"/>
+            </StackPanel>
+            <TextBlock x:Name="gameOverText" Canvas.Left="459" TextWrapping="Wrap" Canvas.Top="161" FontFamily="Arial Black" FontSize="100" FontWeight="Bold" FontStyle="Italic" Text="Game Over"/>
         </Canvas>
     </Grid>
 </Page>
